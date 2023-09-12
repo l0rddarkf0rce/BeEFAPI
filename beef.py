@@ -83,7 +83,8 @@ class BeEFAPI:
     """
     Return a JSON object containing a list of all of the hooked browsers.
     """
-    def getHookedBrowsers(self):
+    @property
+    def HookedBrowsers(self):
         res = ''
         browsers = ''
         try:
@@ -112,7 +113,8 @@ class BeEFAPI:
     """
     Get  information about all hooked browser's logs, both global and relative.
     """
-    def getLogs(self):
+    @property
+    def BrowserLogs(self):
         try:
             res = json.loads(requests.get(f'{self.url}/api/logs?token={self.token}').text)
         except Exception as e:
@@ -134,7 +136,8 @@ class BeEFAPI:
     """
     List all available BeEF command modules.
     """
-    def getCommandModules(self):
+    @property
+    def CommandModules(self):
         try:
             res = json.loads(requests.get(f'{self.url}/api/modules?token={self.token}').text)
         except Exception as e:
@@ -168,7 +171,7 @@ class BeEFAPI:
 def main():
     # SAMPLE CODE
     beef = BeEFAPI('127.0.0.1', 'foobar', 'foobar', 3000)
-    browsers = beef.getHookedBrowsers()
+    browsers = beef.HookedBrowsers()
     print(browsers,'\n\n\n')
 
     for x in browsers['offline']:
